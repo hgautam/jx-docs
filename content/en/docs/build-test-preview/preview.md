@@ -59,9 +59,10 @@ git add index.html server.js
     <img src="/images/pr-comment.png"/>
   </div>
 </div>
-The preview environment is created whenever a change is made to the
+The preview environment is created whenever a pull request to master is created in the
 repository, allowing any relevant user to validate or evaluate features,
-bugfixes, or security hotfix.
+bugfixes, or security hotfix. Then, as additional commits are added to the PR branch
+the preview environment is automatically updated.
 
 ### Testing the preview environment
 
@@ -69,7 +70,7 @@ The development bot created during the installation process sends a notification
 
 When the approver confirms the code and functionality changes, they can
 approve with a simple comment that merges the code changes back to
-the master branch and initiate a production build with the new feature:
+the master branch and initiate a release candidate build with the new feature:
 
 ```sh
     /approve

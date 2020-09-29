@@ -103,7 +103,7 @@ disableKinds = ["taxonomy", "taxonomyTerm"]
 
 [params]
 ## Used for views in rendered HTML (i.e., rather than using the .Hugo variable)
-release = "2.1.126"
+release = "2.1.127"
 
 copyright = "The Jenkins X Authors."
 privacy_policy = "https://policies.google.com/privacy"
@@ -125,6 +125,9 @@ github_project_repo = "https://github.com/jenkins-x/jx"
 
 # Google Custom Search Engine ID. Remove or comment out to disable search.
 gcs_engine_id = "011737558837375720776:fsdu1nryfng"
+
+# Enable syntax highlighting and copy buttons on code blocks with Prism
+prism_syntax_highlighting = true
 
 # User interface configuration
 [params.ui]
