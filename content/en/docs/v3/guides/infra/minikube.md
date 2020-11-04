@@ -25,7 +25,7 @@ minikube start --cpus 4 --memory 8048 --disk-size=100g --addons=ingress --vm=tru
 
 ## Setup
 
-*  <a href="https://github.com/jx3-gitops-repositories/jx3-minikube-vault/generate" target="github" class="btn bg-primary text-light">Create Git Repository</a> to store the GitOps configuration of Jenkins X and the apps you want to deploy
+*  <a href="https://github.com/jx3-gitops-repositories/jx3-minikube/generate" target="github" class="btn bg-primary text-light">Create the cluster Git Repository</a> based on the [jx3-gitops-repositories/jx3-minikube template](https://github.com/jx3-gitops-repositories/jx3-minikube/generate) 
 
 * `git clone` the new repository and `cd` into the git clone directory
 
@@ -63,7 +63,13 @@ git commit -a -m "fix: configurations for local minikube"
 git push origin master
 ```
 
-* now [install the git operator](/docs/v3/guides/operator/)
+* <a href="/docs/v3/guides/operator/" class="btn bg-primary text-light">Install the Git Operator</a> 
+
+* switch to the `jx` namespace
+
+```bash    
+jx ns jx
+```        
 
 * once Jenkins X is installed run the following command to enable webhooks via `ngrok`
 
@@ -71,4 +77,4 @@ git push origin master
 kubectl port-forward svc/hook 8080:80
 ```
 
-*  <a href="/docs/v3/create-project/" class="btn bg-primary text-light">Create or import projects</a>
+*  <a href="/docs/v3/develop/create-project/" class="btn bg-primary text-light">Create or import projects</a>

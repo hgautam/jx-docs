@@ -5,7 +5,14 @@ description: Setup Jenkins X on vanilla Kubernetes
 date: 2017-02-01
 publishdate: 2017-02-01
 lastmod: 2020-02-21
-weight: 120
+weight: 150
+---
+
+---
+**NOTE**
+
+Ensure you are logged into GitHub else you will get a 404 error when clicking the links below
+
 ---
 
 ## On Premise Kubernetes
@@ -49,7 +56,7 @@ We need your kubernetes cluster to have a default [storage class](https://kubern
 
 This is our current recommended quickstart for on premise kubernetes:
 
-*  <a href="https://github.com/jx3-gitops-repositories/jx3-kubernetes/generate" target="github" class="btn bg-primary text-light">Create Git Repository</a> 
+*  <a href="https://github.com/jx3-gitops-repositories/jx3-kubernetes/generate" target="github" class="btn bg-primary text-light">Create the cluster Git Repository</a> based on the [jx3-gitops-repositories/jx3-kubernetes](https://github.com/jx3-gitops-repositories/jx3-kubernetes/generate) template
 
 * ensure you are connected to your cluster so you can run the following [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl/) commands 
 
@@ -62,12 +69,12 @@ kubectl get node
     target="github" class="btn bg-primary text-light" 
     title="install the git operator to setup Jenkins X in your cluster">
     Install the git operator
-  </a> from inside a git clone of your git repository via something like: 
+  </a> from inside a git clone of the git repository you created above.
 
-```bash 
-git clone https://github.com/myuser/mygitops-repo.git myrepo
-cd myrepo
-jx admin operator    
-```  
+* switch to the `jx` namespace
 
-*  <a href="/docs/v3/create-project/" class="btn bg-primary text-light">Create or import projects</a> 
+```bash    
+jx ns jx
+```        
+
+*  <a href="/docs/v3/develop/create-project/" class="btn bg-primary text-light">Create or import projects</a> 

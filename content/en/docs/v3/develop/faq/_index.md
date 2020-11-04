@@ -1,34 +1,36 @@
 ---
 title: FAQ
 linktitle: FAQ
-description: Questions on using helm 3 and boot
+description: Questions on using Jenkins X 3.x and helm 3
 weight: 500
 aliases:
   - /faq/
+  - /docs/v3/guides/faq/
 ---
 
 
 
 ## How do I list the apps that have been deployed?
 
-You can use helm 3.x directly to list all the apps (charts) deployed in a namespace:
+You can see the helm charts that are installed along witht their version and namespaces by looking at the `releases` section of your `helmfile.yaml` file in your cluster git repository.
 
-``` 
-helm list
+You can view all of the current [Preview Environments](/docs/build-test-preview/preview/) via
+
+```bash 
+kubectl get preview
+```
+
+There could be some additional charts installed via Terraform for the [git operator](/docs/v3/guides/operator/) and [health subsystem](/docs/v3/guides/health/) which can be viewed via:
+  
+```bash 
+helm list --all-namespaces
 ```                                                                                
-
-To look in another namespace add it as an argument:
-
-``` 
-helm list -n nginx
-```                                                                                
-
 
 ## How do I customise an App in an Environment
 
 With the new helm 3 based boot every environment uses boot - so there is a single way to configure anything whether its in the `dev`, `staging` or `production` environment and whether or not you are using [multiple clusters](/docs/v3/guides/multi-cluster/).
 
-See [how to customise a chart](/docs/v3/guides/apps/#customising-charts)
+See [how to customise a chart](/docs/v3/develop/apps/#customising-charts)
 
 ## How do I configure the ingress domain in Dev, Staging or Production?
 
@@ -51,7 +53,7 @@ ingress:
   namespaceSubDomain: "."
 ```
 
-If you wish to change any of these values for a single app only then you can use the [app customisation mechanism](/docs/v3/guides/apps/#customising-charts).
+If you wish to change any of these values for a single app only then you can use the [app customisation mechanism](/docs/v3/develop/apps/#customising-charts).
 
 e.g. for an app called `mychart` you can create a file called `apps/mychart/values.yaml` in the git repository for your environment and add the following YAML:
 
@@ -76,7 +78,7 @@ ingress:
 
 This will then be applied to all the Jenkins X ingress resources for things like `lighthouse` or `nexus` - plus any apps you deploy to `dev`, `staging` or `production`.
 
-If you want to override the TLS secret name for a specific app in a specific environment then rather like the [above question](#how-do-i-configure-the-ingress-domain-in-dev-staging-or-production) you can use the [app customisation mechanism](/docs/v3/guides/apps/#customising-charts).
+If you want to override the TLS secret name for a specific app in a specific environment then rather like the [above question](#how-do-i-configure-the-ingress-domain-in-dev-staging-or-production) you can use the [app customisation mechanism](/docs/v3/develop/apps/#customising-charts).
  
 e.g. for an app called `mychart` you can create a file called `apps/mychart/values.yaml` in the git repository for your environment and add the following YAML:
                                                                                                                                         
@@ -89,12 +91,20 @@ jxRequirements:
 ```
 
 
-## How do I uninstall boot?
+## How do I uninstall Jenkins X?
 
-From inside a git clone of your `dev`, `staging` or `production` environment's git repository you can run: 
+We don't yet have a nice uninstall command
 
-```
-jx step create helmfile 
-helmfile destroy
-```
+
+## Why does Jenkins X fail to download plugins?
+
+When I run a `jx` command I get an error like...
+
+``` Get https://github.com/jenkins-x/jx-..../releases/download/v..../jx-.....tar.gz: dial tcp: i/o timeout```
+
+This sounds like a network problem; the code in `jx` is trying to download from `github.com` and your laptop is having trouble resolving the `github.com` domain.
+
+* do you have a firewall / VPN / HTTP proxy blocking things?
+* is your `/etc/resolv.conf` causing issues? e.g. if you have multiple entries for your company VPN?
+
 
