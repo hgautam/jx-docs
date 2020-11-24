@@ -1,0 +1,15 @@
+
+environments:
+  default:
+    values:
+    - jx-values.yaml
+releases:
+- chart: '.'
+  name: preview
+  wait: true
+  createNamespace: true
+  namespace: '{{ requiredEnv "PREVIEW_NAMESPACE" }}'
+  values:
+  - values.yaml
+  - jx-values.yaml
+  - values.yaml.gotmpl
